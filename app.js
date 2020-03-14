@@ -46,7 +46,7 @@ var uploadRoutes = require('./routes/upload');
 var imagenesRoutes = require('./routes/imagenes');
 
 //Conexion a base de datos
-mongoose.connection.openUri('mongodb://3.19.71.250/CopyWeb', (err, res) => {
+mongoose.connection.openUri('mongodb://localhost:27017/CopyWeb', (err, res) => {
    // en js throw detiene todo el proceso
     if (err) throw err;
     

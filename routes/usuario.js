@@ -107,38 +107,38 @@ app.get('/', (req, res, next) => {
 // ==========================================
 // Crear un nuevo usuario
 // ==========================================
-// app.post('/', mdAutenticacion.verificaToken, (req, res) => {
+app.post('/',  (req, res) => {
 
-//     var body = req.body;
+    var body = req.body;
 
-//     var usuario = new Usuario({
-//         nombre: body.nombre,
-//         email: body.email,
-//         password: bcrypt.hashSync(body.password, 10),
-//         img: body.img,
-//         role: body.role
-//     });
+    var usuario = new Usuario({
+        nombre: body.nombre,
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 10),
+        img: body.img,
+        role: body.role
+    });
 
-//     usuario.save((err, usuarioGuardado) => {
+    usuario.save((err, usuarioGuardado) => {
 
-//         if (err) {
-//             return res.status(400).json({
-//                 ok: false,
-//                 mensaje: 'Error al crear usuario',
-//                 errors: err
-//             });
-//         }
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'Error al crear usuario',
+                errors: err
+            });
+        }
 
-//         res.status(201).json({
-//             ok: true,
-//             usuario: usuarioGuardado,
-//             usuariotoken: req.usuario
-//         });
+        res.status(201).json({
+            ok: true,
+            usuario: usuarioGuardado,
+            usuariotoken: req.usuario
+        });
 
 
-//     });
+    });
 
-// });
+});
 
 
 // ============================================

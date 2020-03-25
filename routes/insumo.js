@@ -124,7 +124,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
             });
         }
 
-        insumo.codido = body.nombre,
+        insumo.codido = body.codigo,
         insumo.tipo = body.tipo,
         insumo.marca = body.marca,
         insumo.detalle = body.detalle,

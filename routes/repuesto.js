@@ -155,7 +155,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
             });
         }
 
-        repuesto.codido = body.nombre,
+        repuesto.codido = body.codigo,
         repuesto.tipo = body.tipo,
         repuesto.marca = body.marca,
         repuesto.condicion = body.condicion,

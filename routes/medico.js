@@ -166,33 +166,33 @@ app.post('/', mdAutenticacion.verificarToken ,(req, res) => {
 //============================================================
 // ELIMINAR UN MEDICO  
 //============================================================
-app.delete('/:id',mdAutenticacion.verificarToken, (req,res) => {
+// app.delete('/:id',mdAutenticacion.verificarToken, (req,res) => {
 
-    var id = req.params.id;
+//     var id = req.params.id;
 
-    Medico.findByIdAndRemove(id, ( err, medicoBorrado ) =>{
+//     Medico.findByIdAndRemove(id, ( err, medicoBorrado ) =>{
 
-        if(err){
-            res.status(500).json({
-                ok: false,
-                mensaje: 'Error al Borrar hoapital',
-                errors: err
-            });
-         }
+//         if(err){
+//             res.status(500).json({
+//                 ok: false,
+//                 mensaje: 'Error al Borrar hoapital',
+//                 errors: err
+//             });
+//          }
 
-         if(!medicoBorrado){
-            res.status(400).json({
-                ok: false,
-                mensaje: 'No existe medico con ese id',
-                errors: {message: 'No existe medico con ese id'}
-            });
-         }
+//          if(!medicoBorrado){
+//             res.status(400).json({
+//                 ok: false,
+//                 mensaje: 'No existe medico con ese id',
+//                 errors: {message: 'No existe medico con ese id'}
+//             });
+//          }
 
-         res.status(200).json({
-            ok: true,
-            medico: medicoBorrado
-        });
-    } )
-});
+//          res.status(200).json({
+//             ok: true,
+//             medico: medicoBorrado
+//         });
+//     } )
+// });
 
 module.exports = app; 

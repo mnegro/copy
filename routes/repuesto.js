@@ -136,6 +136,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
 
     var id = req.params.id;
     var body = req.body;
+    console.log(body);
     Repuesto.findById(id, (err, repuesto) => {
 
         if(err){
@@ -155,7 +156,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
             });
         }
 
-        repuesto.codido = body.codigo,
+        repuesto.codigo = body.codigo,
         repuesto.tipo = body.tipo,
         repuesto.marca = body.marca,
         repuesto.condicion = body.condicion,
@@ -168,7 +169,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
         repuesto.duracion = body.duracion,
         repuesto.eliminado = body.eliminado,
         repuesto.proveedor = body.proveedor
-
+        console.log(repuesto);
         repuesto.save( (err, repuestoGuardado) => {
 
             if(err){

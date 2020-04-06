@@ -102,49 +102,7 @@ app.get('/maquina/:id', [ mdAutenticacion.verificarToken, mdAutenticacion.verifi
                     errors: {message: 'No existe reparaciones para esa maquina'}
                 });
             }
-            // nuevoArray= reparaciones;
-            // for (let i = 0; i < nuevoArray.length; i++) {
-            //     suma =0;
-            //     if( nuevoArray.length>0 ){
-
-            //         for( s=0; s < nuevoArray[i].repuestos.length; s++ ){
             
-            //             var cantidad = nuevoArray[i].repuestos[s].cantidad;
-            //             var id = nuevoArray[i].repuestos[s]._id;
-            //             nuevoArray[i].repuestos[s].precio = precioActualizado(id);
-            //             nuevoArray[i].total += calcularMonto(id,cantidad,nuevoArray[i]._id);
-            //              nuevoArray[i].total += nuevoArray[i].repuestos[s].precio * cantidad;
-            //             console.log(nuevoArray[i].repuestos[s].precio );
-            //         }
-                   
-            //       }
-            //       //nuevoArray[i].total = suma;
-            // }
-            for (const reparacion of reparaciones) {
-                // for (const repuesto in reparacion.repuestos) {
-                //         precioActualizado(reparacion.repuestos[repuesto]._id).then(respuesta => {
-                //             reparacion.repuestos[repuesto].precio=respuesta;
-                //         });
-                //         reparacion.total += reparacion.repuestos[repuesto].cantidad * reparacion.repuestos[repuesto].precio;
-                    
-                // }
-                // for (let i = 0; i < reparacion.repuestos.length; i++) {
-                //     precioActualizado(reparacion.repuestos[i]._id).then(respuesta => {
-                //         reparacion.repuestos[i].precio=respuesta;
-                //         console.log(reparacion.repuestos[i].precio);
-
-                //     });
-                //     reparacion.total += reparacion.repuestos[i].cantidad *  reparacion.repuestos[i].precio;
-                // }
-                
-                for (const repuesto of reparacion.repuestos) {
-                       
-                       repuesto.precio = precioActualizado(repuesto._id).then();
-                       reparacion.total += repuesto.cantidad * repuesto.precio;
-                        console.log(repuesto.precio);
-                }
-            }
-
             res.status(200).json({
                 ok: true,
                 reparaciones: reparaciones
@@ -198,14 +156,17 @@ app.post('/', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_R
         repuestos: body.repuestos
        
     });
-    console.log(reparacion)
+    var suma =0;
     if( reparacion.repuestos.length){
         for( i=0; i < reparacion.repuestos.length; i++ ){
 
             var cantidad = reparacion.repuestos[i].cantidad;
+            var precio = reparacion.repuestos[i].precio;
             var id = reparacion.repuestos[i]._id;
             verificaStock(id,cantidad);
+            suma += cantidad * precio;
         }
+        reparacion.total = suma;
        
       }
 

@@ -10,6 +10,8 @@ var Maquina = require('../models/maqina');
 
 var Reparacion = require('../models/reparacion');
 
+var Insumo = require('../models/insumo');
+
 var isodate = require("isodate");
 
 //============================================================
@@ -161,6 +163,7 @@ app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
 
         factura.fecha = body.fecha,
         factura.detalle = body.detalle,
+        factra.insumo = body.insumo,
         factura.paga = body.paga,
         factura.aCuenta = body.aCuenta,
         factura.cliente = body.cliente,
@@ -197,6 +200,7 @@ app.post('/:tipo', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAd
     var factura = new Factura({
         fecha: body.fecha,
         detalle: body.detalle,
+        insumo: body.insumo,
         paga: body.paga,
         aCuenta: body.aCuenta,
         reparacion: body.reparacion,
@@ -219,6 +223,11 @@ app.post('/:tipo', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAd
            setearReparacion( factura.reparacion[i]._id );
         
          }
+      }
+      if( factura.insumo.length >0 ){
+          for (let i = 0; i < factura.insumo.length; i++) {
+             setearInsumo( factura.insumo[i].codigo, factura.insumo[i].cantidad );
+          }
       }
     
     factura.save( (err, facturaGuardada) =>{
@@ -270,7 +279,7 @@ app.get('/cliente/:id', (req,res) =>{
                     errors: {message: 'No existe una factura para ese cliente'}
                 });
             }
-
+           
             Factura.count({},(err,conteo) =>{
                 
                 res.status(200).json({
@@ -405,5 +414,25 @@ function setearReparacion(id){
     })
 }
 
+function setearInsumo(codigo,cantidad){
+    return new Promise((resolve,reject)=>{
+        Insumo.findOne({"codigo":codigo},(err,insumo)=>{
+             if(err){
+            reject('Error al actualizar insumo',err);
+             }else{
+                    insumo.stock = insumo.stock - cantidad;
+                    insumo.save( (err,insumoActualizado)=>{
+                     if( err ){
+                         reject('Error al actualizar el insumo',err);
+                      }else{
+                             resolve( insumoActualizado );
+                      }
+            });
+
+          }  
+        })
+       
+    })
+}
 module.exports = app; 
 

@@ -12,9 +12,9 @@ var Insumo = require('../models/insumo');
 // [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role]
 app.get('/:paginado/:desde', (req, res, next) => {
 
-    var desde = req.query.desde || 0;
+    var desde = req.params.desde || 0;
     desde = Number(desde); 
-
+    console.log(desde)
     Insumo.find({ eliminado: false })
     .skip(desde)
     .limit(7)
@@ -176,9 +176,17 @@ app.post('/', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_R
         stock: body.stock,
         proveedor: body.proveedor,
     });
-    if( insumo.precio == 0 ){
-        insumo.precio = insumo.costo + ((insumo.costo * insumo.porcAplicado)/100);
-    }
+     Insumo.findOne({codigo:insumo.codigo},(err,insumoExistente) =>{
+        if(insumoExistente){
+              res.status(400).json({
+                ok: false,
+                mensaje: 'Ya existe un insumo con ese codigo',
+                errors: err
+            });
+        }else{
+                if( insumo.precio == 0 ){
+                    insumo.precio = insumo.costo + ((insumo.costo * insumo.porcAplicado)/100);
+                }
     insumo.save( (err, insumoGuardado) =>{
 
         if(err){
@@ -194,6 +202,7 @@ app.post('/', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_R
       
     });
 });
+}});
 });
 
 //============================================================

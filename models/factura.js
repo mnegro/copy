@@ -11,6 +11,15 @@ var facturaSchema =	new Schema({
        precio: { type: Number, required: false },
        maquina: { type: Object, required: false }
     }],
+    insumo: [{
+        codigo: {	type: String,	required: false	},
+        tipo: { type: String, required: [true, 'Ingrese el tipo de repusto'] },
+        marca: { type: String, required:false },
+        detalle: {	type: String,	required: [true,	'El	Detalle es necesario']	},
+        precio: {	type: Number,	required: false	},
+        cantidad: { type: Number, required: false } 
+
+    }],
     paga: { type: Boolean, default: false },
     aCuenta: { type: Number, default:0, required:false },
     reparacion: [{ type: Schema.Types.ObjectId,    ref: 'Reparacion',  required: false }],

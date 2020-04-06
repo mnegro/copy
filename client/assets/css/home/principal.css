@@ -1,0 +1,100 @@
+body{
+    font-family: 'Titillium Web', sans-serif;
+  }
+  .navbar-toggler:focus {outline: none;}
+  #hero {
+    background-image: url('/src/img/hero.jpg');
+    background-size: cover;
+    padding-top: 90px;
+    min-height: 700px;
+    color: #ffffff;
+  }
+  
+  .imgaboutus {
+    background-size: cover;
+    padding-top: 40px;
+    color: #ffffff;
+    
+  }
+  
+  h1{ font-size: 66px; font-weight: 600; line-height: 80px; }
+  h2{ font-size: 44px; margin-bottom: 30px; }
+  h3{ font-size: 33px; margin-top: 0px; color:white; text-align: center;}
+  h4{ font-size: 27px; margin-top: 40px; color: white;}
+  h5{ font-size: 25px;margin-top: 60px; bottom: 0px; text-align: center; color:white;}
+  
+  p{
+    font-size: 18px;
+    color: darkslategray;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+  section{
+    padding: 120px 0;
+  }
+  .conteiner-contact{
+    padding: 60px;
+  }
+  
+  .bg-light-grey { background-color:#f5f5f5;}
+  .bg-black { background-color:black; }
+  .content-center{
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+  }
+  .row{
+    margin-left: 10px;
+  }
+  .portfolio-conteiner {
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .portfolio-conteiner img{
+    -moz-transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+  }
+  
+  .img{
+    background-size: cover;
+    width: 500px;
+    border-radius: 8px;
+    height: 400px;
+  }
+  .portfolio-conteiner:hover img{
+    -moz-transition: scale(1.2) ;
+    -webkit-transition: scale(1.2);
+    transform: scale(1.2);
+  }
+  
+  .portfoliodetails{
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    z-index: 9000;
+  }
+  .portfoliodetails h2,.portfoliodetails p{
+    color:white;
+  }
+  .portfoliodetails h2{
+    margin-bottom: 0px;
+  }
+  #span-contact{
+    font-size: 20px;
+    color: #ffffff;
+  }
+  .ico{
+    font-size: 20px;
+    color: #ffffff;
+  }
+  
+  @media (max-width: 575.98px) { 
+    h1{ font-size: 40px; line-height: normal;}
+  
+   }
+  
+  

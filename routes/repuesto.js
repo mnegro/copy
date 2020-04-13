@@ -12,7 +12,7 @@ var Repuesto = require('../models/repuesto');
 // [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role]
 app.get('/', (req, res, next) => {
 
-    var desde = req.query.desde || 0;
+    var desde = req.params.desde || 0;
     desde = Number(desde); 
 
     Repuesto.find({ eliminado: false })

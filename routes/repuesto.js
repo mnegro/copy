@@ -10,11 +10,11 @@ var Repuesto = require('../models/repuesto');
 // OBTENER TODOS LOS REPUESTOS
 //============================================================
 // [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role]
-app.get('/', (req, res, next) => {
+app.get('/:desde',[ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req, res, next) => {
 
     var desde = req.params.desde || 0;
     desde = Number(desde); 
-
+    console.log(desde)
     Repuesto.find({ eliminado: false })
     .skip(desde)
     .limit(7)

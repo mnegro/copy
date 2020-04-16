@@ -158,7 +158,7 @@ function buscarUsuarios(busqueda, regex) {
 }
 
 function buscarRepuestos(busqueda, regex) {
-
+    var listaRepuestos = []
     return new Promise((resolve, reject) => {
 
         Repuesto.find({})
@@ -168,7 +168,13 @@ function buscarRepuestos(busqueda, regex) {
                 if (err) {
                     reject('Error al cargar repuestos', err);
                 } else {
-                    resolve(repuestos);
+                    repuestos.forEach(rep => {
+                        if( !rep.eliminado ){
+                            listaRepuestos.push(rep);
+                            
+                        }
+                    });
+                    resolve(listaRepuestos);
                 }
             });
 
@@ -176,7 +182,7 @@ function buscarRepuestos(busqueda, regex) {
 
 }
 function buscarInsumos(busqueda, regex) {
-
+    var listaINsumos = []
     return new Promise((resolve, reject) => {
 
         Insumo.find({})
@@ -186,7 +192,13 @@ function buscarInsumos(busqueda, regex) {
                 if (err) {
                     reject('Error al cargar insumos', err);
                 } else {
-                    resolve(insumos);
+                    insumos.forEach(ins => {
+                        if( !ins.eliminado ){
+                            listaINsumos.push(ins);
+                            
+                        }
+                    });
+                    resolve(listaINsumos);
                 }
             });
 

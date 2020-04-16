@@ -46,10 +46,10 @@ var uploadRoutes = require('./routes/upload');
 var imagenesRoutes = require('./routes/imagenes');
 
 //Conexion a base de datos
-mongoose.connection.openUri('mongodb://127.0.0.1:27017/CopyWeb', (err, res) => {
+mongoose.connection.openUri('mongodb://localhost:27017/CopyWeb', (err, res) => {
    // en js throw detiene todo el proceso
     if (err) throw err;
-    //127.0.0.1:27017
+    
 
     console.log('Base de datos: \x1b[32m%s\x1b[0m', 'online');
 
@@ -66,7 +66,7 @@ mongoose.connection.openUri('mongodb://127.0.0.1:27017/CopyWeb', (err, res) => {
 
 //Server index config
 //var serveIndex = require('serve-index');
-app.use(express.static(__dirname + '/client'));
+//app.use(express.static(__dirname + '/client'))
 //app.use('/uploads', serveIndex(__dirname + '/uploads'));
 
 

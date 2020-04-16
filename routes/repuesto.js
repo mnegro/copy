@@ -11,10 +11,8 @@ var Repuesto = require('../models/repuesto');
 //============================================================
 // [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role]
 app.get('/:desde',[ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req, res, next) => {
-
     var desde = req.params.desde || 0;
     desde = Number(desde); 
-    console.log(desde)
     Repuesto.find({ eliminado: false })
     .skip(desde)
     .limit(7)
@@ -68,11 +66,10 @@ app.get('/rep_prov/:busqueda/:prov', (req, res, next) => {
 //============================================================
 // OBTENER UN REPUESTO   
 //============================================================
-app.get('/:id', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req,res) =>{
-
+app.get('/id/:id', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req,res) =>{
     var id= req.params.id;
     Repuesto.findById( id )
-        // .populate('maquina')
+        .populate('proveedor')
         .exec( (err, repuesto)=>{
             if(err){
                return res.status(500).json({
@@ -101,7 +98,7 @@ app.get('/:id', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin
 // OBTENER UN REPUESTO POR CODIGO  
 //============================================================
 app.get('/:codigo', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req,res) =>{
-
+    console.log('entre por codigo')
     var codigo= req.params.id;
     Repuesto.find({codigo: codigo})
         .exec( (err, repuesto)=>{
@@ -132,8 +129,9 @@ app.get('/:codigo', [ mdAutenticacion.verificarToken, mdAutenticacion.verificarA
 // ACTUALIZAR UN REPUESTO   
 //============================================================
 
-app.put('/:id', mdAutenticacion.verificarToken, (req,res) => {
+app.put('/:id', [mdAutenticacion.verificarToken, mdAutenticacion.verificarAdmin_Role], (req,res) => {
 
+    console.log('?????')
     var id = req.params.id;
     var body = req.body;
     Repuesto.findById(id, (err, repuesto) => {
